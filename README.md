@@ -21,7 +21,7 @@ This repository contains a Playwright test project designed with an extremely ma
 - **Users**
 
 ## Prerequisites
-- Node.js installed
+- Node.js installed (version 20 or higher)
 - Yarn package manager installed
 
 ## Installation
