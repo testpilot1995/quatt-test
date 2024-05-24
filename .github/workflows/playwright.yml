@@ -1,32 +1,48 @@
 name: Playwright Tests
+
 on:
   push:
-    branches: [ main, master ]
+    branches: [ main ]
   pull_request:
-    branches: [ main, master ]
+    branches: [ main ]
+
 jobs:
   test:
-    timeout-minutes: 60
     runs-on: ubuntu-latest
+
     steps:
-    - uses: actions/checkout@v4
-    - uses: actions/setup-node@v4
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
       with:
-        node-version: lts/*
+        node-version: '14'
+
     - name: Install dependencies
-      run: npm install -g yarn && yarn
+      run: npm install
+
     - name: Install Playwright Browsers
       run: yarn playwright install --with-deps
+
     - name: Set up environment variables
       env:
-        BASE_URL: ${{ secrets.API_BASE_URL }}
         BEARER_TOKEN: ${{ secrets.BEARER_TOKEN }}
-      run: echo "BASE_URL=${API_BASE_URL}" >> $GITHUB_ENV && echo "BEARER_TOKEN=${BEARER_TOKEN}" >> $GITHUB_ENV
+        API_BASE_URL: ${{ secrets.API_BASE_URL }}
+      run: |
+        echo "BEARER_TOKEN=${{ secrets.BEARER_TOKEN }}" >> $GITHUB_ENV
+        echo "API_BASE_URL=${{ secrets.API_BASE_URL }}" >> $GITHUB_ENV
+
+    - name: Replace environment variables in code
+      run: |
+        find . -type f -exec sed -i "s|process\.env\.BEARER_TOKEN|${{ secrets.BEARER_TOKEN }}|g" {} +
+        find . -type f -exec sed -i "s|process\.env\.API_BASE_URL|${{ secrets.API_BASE_URL }}|g" {} +
+
     - name: Run Playwright tests
-      run: yarn playwright test 
-    - uses: actions/upload-artifact@v4
-      if: always()
+      run: yarn playwright test
+
+    - name: Upload Playwright test results
+      uses: actions/upload-artifact@v2
       with:
-        name: playwright-report
-        path: playwright-report/
-        retention-days: 30
+        name: test-results
+        path: test-results/
