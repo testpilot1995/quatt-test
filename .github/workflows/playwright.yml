@@ -38,8 +38,8 @@ jobs:
         BEARER_TOKEN: ${{ secrets.BEARER_TOKEN }}
         API_BASE_URL: ${{ secrets.API_BASE_URL }}
       run: |
-        find . -type f -exec sed -i "|process\.env\.BEARER_TOKEN|${BEARER_TOKEN//\//\\/}|g" {} +
-        find . -type f -exec sed -i "|process\.env\.API_BASE_URL|${API_BASE_URL//\//\\/}|g" {} +
+          find . -type f -exec sed -i "s|process\.env\.BEARER_TOKEN|${BEARER_TOKEN//&/\\&}|g" {} +
+          find . -type f -exec sed -i "s|process\.env\.API_BASE_URL|${API_BASE_URL//&/\\&}|g" {} +
 
     - name: Run Playwright tests
       run: yarn playwright test
