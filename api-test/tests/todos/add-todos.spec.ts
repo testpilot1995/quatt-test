@@ -12,6 +12,7 @@ let due_on : string;
 let status: string;
 const API_TEST1 = `Add new todo for a user which has added earlier`
 const token = process.env.BEARER_TOKEN!;
+test.describe('API-POST:', async() => {
 test.beforeEach(async ({request}) => {
   dataFaker = new DataFaker();
   user = new User(dataFaker.getAllUserData())
@@ -36,3 +37,4 @@ test.beforeEach(async ({request}) => {
     expect(todoItem.status).toBe(status);
     expect(await convertTime(todoItem.due_on)).toBe(await convertTime(due_on));
   });
+});

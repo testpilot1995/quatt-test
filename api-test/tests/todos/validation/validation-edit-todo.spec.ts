@@ -12,6 +12,8 @@ let status: string;
 let todo: Todos;
 let todoId : number;
 const token = process.env.BEARER_TOKEN!;
+test.describe('API-PATCH-VALIDATION:', async() => {
+  
 test.beforeEach(async ({request}) => {
   dataFaker = new DataFaker();
   user = new User(dataFaker.getAllUserData())
@@ -62,3 +64,4 @@ test(API_TEST3, async ({ request }) => {
   expect(addNewPost.status()).toBe(422);
 }); 
 }
+}); 

@@ -9,6 +9,8 @@ let userId: number;
 let title: string;
 let body : string;
 const token = process.env.BEARER_TOKEN!;
+test.describe('API-VALIDATION-POST:', async() => {
+  
 test.beforeEach(async ({request}) => {
   dataFaker = new DataFaker();
   user = new User(dataFaker.getAllUserData())
@@ -28,3 +30,4 @@ for (const invalidData of invalidUserData) {
     expect(addNewPost.status()).toBe(422);
   }); 
 }
+})

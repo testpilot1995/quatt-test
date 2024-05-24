@@ -10,6 +10,8 @@ let title: string;
 let body : string;
 const API_TEST1 = `Add new post for a user which has added earlier`
 const token = process.env.BEARER_TOKEN!;
+test.describe('API-POST:', async() => {
+
 test.beforeEach(async ({request}) => {
   dataFaker = new DataFaker();
   user = new User(dataFaker.getAllUserData())
@@ -31,3 +33,4 @@ test.beforeEach(async ({request}) => {
     expect(addedPost.title).toBe(title);
     expect(addedPost.body).toBe(body);
   });
+});

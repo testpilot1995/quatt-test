@@ -2,13 +2,12 @@ import { defineConfig, devices } from '@playwright/test';
 import 'dotenv/config';
 export default defineConfig({
   testDir: './api-test',
-  fullyParallel: true,
+  timeout: 200000,
   forbidOnly: !!process.env.CI,
-  retries: process.env.CI ? 2 : 0,
-  workers: process.env.CI ? 1 : undefined,
+  workers: process.env.WORKERS || 1,
+  retries: 1,
   reporter: 'html',
   use: {
- 
     trace: 'on-first-retry',
   },
 

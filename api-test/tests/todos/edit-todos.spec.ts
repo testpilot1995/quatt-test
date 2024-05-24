@@ -3,7 +3,6 @@ import { DataFaker } from '../../tools/modules/faker/data-faker';
 import { User} from '../../tools/requests/users';
 import { Todos } from '../../tools/requests/todos';
 import { convertTime } from '../../tools/modules/shared/time-convert';
-import { stat } from 'fs';
 let dataFaker: DataFaker;
 let user: User;
 let userId: number;
@@ -14,6 +13,7 @@ let status: string;
 let todoId: number;
 const API_TEST1 = `Add new todo for a user which has added earlier and edit it last successfully`
 const token = process.env.BEARER_TOKEN!;
+test.describe('API-PATCH:', async() => {
 test.beforeEach(async ({request}) => {
   dataFaker = new DataFaker();
   user = new User(dataFaker.getAllUserData())
@@ -39,3 +39,4 @@ test.beforeEach(async ({request}) => {
     expect(todoItem.status).toBe(status);
     expect(await convertTime(todoItem.due_on)).toBe(await convertTime(due_on));
   });
+});

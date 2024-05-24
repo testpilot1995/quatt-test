@@ -54,11 +54,11 @@ export class User {
     }
   };
   
-  async deleteUser(request: APIRequestContext, token: string, id: number): Promise<APIResponse> {
+  async deleteUser(request: APIRequestContext, token: string, id: number | any): Promise<APIResponse> {
     try {
       return await request.delete(
         new URL(
-          path.join(process.env.API_BASE_URL!, getUserByUserId(id))
+          path.join(process.env.API_BASE_URL!, getUserByUserId(id!))
         ).toString(),
         {
           headers: await setHeader(token),

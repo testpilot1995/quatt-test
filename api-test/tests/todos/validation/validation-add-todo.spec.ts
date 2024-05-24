@@ -1,7 +1,6 @@
 import { expect, test } from '@playwright/test';
 import { DataFaker } from '../../../tools/modules/faker/data-faker';
 import { User } from '../../../tools/requests/users';
-import { Posts } from '../../../tools/requests/posts';
 import { Todos } from '../../../tools/requests/todos';
 import { invalidCommentData, invalidDateData, invalidUserData } from '../../../tools/test_data/invalid-data';
 let dataFaker: DataFaker;
@@ -11,6 +10,8 @@ let title: string;
 let due_on : string;
 let status: string;
 const token = process.env.BEARER_TOKEN!;
+test.describe('API-POST-VALIDATION:', async() => {
+  
 test.beforeEach(async ({request}) => {
   dataFaker = new DataFaker();
   user = new User(dataFaker.getAllUserData())
@@ -42,3 +43,4 @@ test(API_TEST3, async ({ request }) => {
   expect(addNewPost.status()).toBe(422);
 }); 
 }
+}); 

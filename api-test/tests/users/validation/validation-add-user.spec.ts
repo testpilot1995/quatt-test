@@ -10,6 +10,7 @@ let userStatus: string;
 let user: User;
 const API_TEST5 = `Try add same user multiple times`
 const token = process.env.BEARER_TOKEN!;
+test.describe('API-POST-VALIDATION:', async() => {
 test.beforeEach(async () => {
   dataFaker = new DataFaker();
   userName = dataFaker.getName();
@@ -46,4 +47,5 @@ test(API_TEST5, async ({ request }) => {
   expect(addNewUserFirst.status()).toBe(201);
   const addNewUserSecond = await user.createNewUser(request,token);
   expect(addNewUserSecond.status()).toBe(422);
+});
 });

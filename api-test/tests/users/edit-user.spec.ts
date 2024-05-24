@@ -8,9 +8,8 @@ let user: User;
 let userId: number;
 let newName : string;
 let newEmail: string;
-let newGender: string;
-let newStatus: string;
 const token = process.env.BEARER_TOKEN!;
+test.describe('API-PATCH:', async() => {
 test.beforeEach(async ({request}) => {
   dataFaker = new DataFaker();
   user = new User(dataFaker.getAllUserData())
@@ -19,10 +18,7 @@ test.beforeEach(async ({request}) => {
   userId = newUserResponse.id;
   newName = dataFaker.getName();
   newEmail = dataFaker.getEmail();
-  newGender = dataFaker.getGender();
-  newStatus = dataFaker.getStatus();
 });  
-
 for (const status of states) {
   for (const gender of genders) {
     const API_TEST1 = `Add new user successfully and after try to change sucessfully name , email, and usergender to: ${gender.userGender} and status to : ${status.userStatus}`
@@ -39,3 +35,4 @@ for (const status of states) {
   });
 }
 }
+});

@@ -11,6 +11,8 @@ let body : string;
 let postId: number;
 const API_TEST1 = `Add new post for a user which has added earlier and at last delete it successfully`
 const token = process.env.BEARER_TOKEN!;
+test.describe('API-DELETE:', async() => {
+
 test.beforeEach(async ({request}) => {
   dataFaker = new DataFaker();
   user = new User(dataFaker.getAllUserData())
@@ -33,3 +35,4 @@ test.beforeEach(async ({request}) => {
     expect(getAllPostResponse.includes(title)).toBe(false);
     expect(getAllPostResponse.includes(body)).toBe(false);
   });
+});

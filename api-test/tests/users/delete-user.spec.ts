@@ -7,6 +7,7 @@ let user: User;
 let userId: number;
 const API_TEST1 = `Add new user successfully and after delete it successfully`
 const token = process.env.BEARER_TOKEN!;
+test.describe('API-DELETE:', async() => {
 test.beforeEach(async ({request}) => {
   dataFaker = new DataFaker();
   user = new User(dataFaker.getAllUserData())
@@ -25,3 +26,4 @@ test.beforeEach(async ({request}) => {
     const getAllUserResponse = await getAllUser.json();
     expect(getAllUserResponse.includes(userId)).toBe(false);
   });
+});

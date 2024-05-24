@@ -3,7 +3,6 @@ import { DataFaker } from '../../tools/modules/faker/data-faker';
 import { User} from '../../tools/requests/users';
 import { Todos } from '../../tools/requests/todos';
 import { convertTime } from '../../tools/modules/shared/time-convert';
-import { stat } from 'fs';
 let dataFaker: DataFaker;
 let user: User;
 let userId: number;
@@ -14,6 +13,7 @@ let status: string;
 let todoId: number;
 const API_TEST1 = `Add new todo for a user which has added earlier and delete it last successfully`
 const token = process.env.BEARER_TOKEN!;
+test.describe('API-DELETE:', async() => {
 test.beforeEach(async ({request}) => {
   dataFaker = new DataFaker();
   user = new User(dataFaker.getAllUserData())
@@ -38,3 +38,4 @@ test.beforeEach(async ({request}) => {
     expect(getTodosResponse.includes(status)).toBe(false);
     expect(getTodosResponse.includes(await convertTime(due_on))).toBe(false);
   });
+});

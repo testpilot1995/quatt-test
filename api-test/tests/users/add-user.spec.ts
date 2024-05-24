@@ -8,6 +8,7 @@ let dataFaker: DataFaker;
 let name: string;
 let email:string ;
 const token = process.env.BEARER_TOKEN!;
+test.describe('API-POST:', async() => {
 test.beforeEach(async () => {
   dataFaker = new DataFaker();
   name = dataFaker.getName();
@@ -21,7 +22,7 @@ for (const status of states) {
     expect(addNewUser.status()).toBe(201);
     const newUserResponse = await addNewUser.json();
     const userId = newUserResponse.id;
-    const getUser = await getUserById(request,token, userId)
+    const getUser = await getUserById(request, token, userId)
     expect(getUser.status()).toBe(200);
     const getUserResponse = await getUser.json()
     expect(getUserResponse.name).toBe(name);
@@ -38,3 +39,4 @@ for (const status of states) {
   });
 }
 }
+});

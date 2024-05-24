@@ -10,6 +10,7 @@ let newEmail: string;
 let newGender: string;
 let newStatus: string;
 const token = process.env.BEARER_TOKEN!;
+test.describe('API-PATCH-VALIDATION:', async() => {
 test.beforeEach(async ({request}) => {
   dataFaker = new DataFaker();
   user = new User(dataFaker.getAllUserData())
@@ -59,4 +60,4 @@ for (const invalidData of invalidUserData) {
     } 
    });
 }
-
+});

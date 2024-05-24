@@ -15,6 +15,8 @@ let body : string;
 let postId: number;
 const API_TEST1 = `Add new comment for a user which has added earlier`
 const token = process.env.BEARER_TOKEN!;
+test.describe('API-POST:', async() => {
+
 test.beforeEach(async ({request}) => {
   dataFaker = new DataFaker();
   user = new User(dataFaker.getAllUserData())
@@ -43,3 +45,4 @@ test.beforeEach(async ({request}) => {
     expect(addedComment.email).toBe(email);
     expect(addedComment.body).toBe(body);
   });
+});

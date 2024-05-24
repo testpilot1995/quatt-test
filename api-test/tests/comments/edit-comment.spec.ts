@@ -16,6 +16,8 @@ let commentId: number;
 let postId: number;
 const API_TEST1 = `Add new comment for a user which has added earlier and at last edit it successfully`
 const token = process.env.BEARER_TOKEN!;
+test.describe('API-PATCH:', async() => {
+  
 test.beforeEach(async ({request}) => {
   dataFaker = new DataFaker();
   user = new User(dataFaker.getAllUserData())
@@ -44,4 +46,5 @@ test.beforeEach(async ({request}) => {
     expect(editedComment.name).toBe(name);
     expect(editedComment.email).toBe(email);
     expect(editedComment.body).toBe(body);
+});
 });
