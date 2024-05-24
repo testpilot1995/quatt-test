@@ -21,9 +21,9 @@ jobs:
       env:
         BASE_URL: ${{ secrets.API_BASE_URL }}
         BEARER_TOKEN: ${{ secrets.BEARER_TOKEN }}
-      run: echo "BASE_URL=${BASE_URL}" >> $GITHUB_ENV && echo "BEARER_TOKEN=${BEARER_TOKEN}" >> $GITHUB_ENV
+      run: echo "BASE_URL=${API_BASE_URL}" >> $GITHUB_ENV && echo "BEARER_TOKEN=${BEARER_TOKEN}" >> $GITHUB_ENV
     - name: Run Playwright tests
-      run: yarn playwright test
+      run: yarn playwright test 
     - uses: actions/upload-artifact@v4
       if: always()
       with:
